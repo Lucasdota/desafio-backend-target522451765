@@ -27,9 +27,9 @@ Dado a sequência de Fibonacci, onde se inicia por 0 e 1 e o próximo valor semp
 
 ### Exercício 3: Faturamento Diário
 Dado um vetor que armazena o valor de faturamento diário de uma distribuidora, desenvolva um programa que calcule e retorne:
-• O menor valor de faturamento ocorrido em um dia do mês;
-• O maior valor de faturamento ocorrido em um dia do mês;
-• Número de dias no mês em que o valor de faturamento diário foi superior à média mensal.
+- O menor valor de faturamento ocorrido em um dia do mês;
+- O maior valor de faturamento ocorrido em um dia do mês;
+- Número de dias no mês em que o valor de faturamento diário foi superior à média mensal.
 
 ### Exercício 4: Percentual de Faturamento por Estado
 Dado o valor de faturamento mensal de uma distribuidora, detalhado por estado:
