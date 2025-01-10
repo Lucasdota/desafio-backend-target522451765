@@ -52,6 +52,7 @@ public class Main {
         System.out.println();
 
         // Exercício 03 (Faturamento diário)
+
         System.out.println("Exercício 03 (Faturamento diário):");
         String url = "https://drive.google.com/uc?id=1qXvCPjEL4jerElN-hnScoKkEVmSQ8A2L";
         String jsonData = getJsonFromUrl(url);
