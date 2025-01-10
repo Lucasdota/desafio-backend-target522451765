@@ -96,7 +96,7 @@ public class Main {
         // Exercício 04 (Faturamento mensal)
 
         System.out.println("Exercício 04 (Faturamento mensal):");
-        Map<String, Double> faturamentoPorEstado = new HashMap<>();
+        Map<String, Double> faturamentoPorEstado = new LinkedHashMap<>();
         faturamentoPorEstado.put("SP", 67836.43);
         faturamentoPorEstado.put("RJ", 36678.66);
         faturamentoPorEstado.put("MG", 29229.88);
