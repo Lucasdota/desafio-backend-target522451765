@@ -58,13 +58,13 @@ Exercício 01 (Soma):
 Resposta do exercício 01: SOMA = 91
 
 Exercício 02 (Fibonacci):
-Digite um número para verificar se pertence à sequência de Fibonacci: 30
-30 não pertence à sequência de Fibonacci.
+Digite um número para verificar se pertence à sequência de Fibonacci: 21
+21 pertence à sequência de Fibonacci.
 
 Exercício 03 (Faturamento diário):
-O menor valor de faturamento ocorrido em um dia do mês: 4500
-O maior valor de faturamento ocorrido em um dia do mês: 21700
-Número de dias no mês em que o valor de faturamento diário foi superior à média mensal: 2
+Menor valor de faturamento: 373.78
+Maior valor de faturamento: 48924.24
+Número de dias com faturamento acima da média: 10
 
 Exercício 04 (Faturamento mensal):
 Faturamento percentual por estado:
@@ -75,6 +75,6 @@ ES: R$27165.48 (15.03%)
 Outros: R$19849.53 (10.98%)
 
 Exercício 05 (Inverter string):
-Digite uma string para inverter: Brasil
+Digite uma string para inverter: brasil
 String invertida: lisarb
 ```

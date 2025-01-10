@@ -1,5 +1,12 @@
 package com.jan_2025.desafio_target;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.*;
 
 public class Main {
@@ -45,39 +52,44 @@ public class Main {
         System.out.println();
 
         // Exercício 03 (Faturamento diário)
-
         System.out.println("Exercício 03 (Faturamento diário):");
-        List<Integer> faturamentoDiario = new ArrayList<>();
-        faturamentoDiario.add(10550);
-        faturamentoDiario.add(7980);
-        faturamentoDiario.add(15220);
-        faturamentoDiario.add(4500);
-        faturamentoDiario.add(21700);
+        String url = "https://drive.google.com/uc?id=1qXvCPjEL4jerElN-hnScoKkEVmSQ8A2L";
+        String jsonData = getJsonFromUrl(url);
+        JSONArray faturamento = new JSONArray(jsonData);
+        double menorValor = Double.MAX_VALUE;
+        double maiorValor = Double.MIN_VALUE;
+        double soma = 0;
+        int diasComFaturamento = 0;
 
-        Integer menorFaturamento = faturamentoDiario.get(0);
-        Integer maiorFaturamento = faturamentoDiario.get(0);
-        int somaMensal = 0;
-        double mediaMensal;
-        int quantidadeSuperiorAMedia = 0;
-        for (Integer faturamento : faturamentoDiario) {
-            if (faturamento < menorFaturamento) {
-                menorFaturamento = faturamento;
+        for (int i = 0; i < faturamento.length(); i++) {
+            JSONObject dia = faturamento.getJSONObject(i);
+            double valor = dia.getDouble("valor");
+            if (valor > 0 && valor < menorValor) {
+                menorValor = valor;
             }
-            if (faturamento > maiorFaturamento) {
-                maiorFaturamento = faturamento;
+            if (valor > maiorValor) {
+                maiorValor = valor;
             }
-            somaMensal += faturamento;
-        }
-        mediaMensal = (double) (somaMensal / faturamentoDiario.size());
-        for ( Integer faturamento : faturamentoDiario) {
-            if (faturamento > mediaMensal) {
-                quantidadeSuperiorAMedia += 1;
+            if (valor > 0) {
+                soma += valor;
+                diasComFaturamento++;
             }
         }
 
-        System.out.println("O menor valor de faturamento ocorrido em um dia do mês: " + menorFaturamento);
-        System.out.println("O maior valor de faturamento ocorrido em um dia do mês: " + maiorFaturamento);
-        System.out.println("Número de dias no mês em que o valor de faturamento diário foi superior à média mensal: " + quantidadeSuperiorAMedia);
+        double mediaMensal = soma / diasComFaturamento;
+
+        int diasAcimaDaMedia = 0;
+        for (int i = 0; i < faturamento.length(); i++) {
+            JSONObject dia = faturamento.getJSONObject(i);
+            double valor = dia.getDouble("valor");
+            if (valor > mediaMensal) {
+                diasAcimaDaMedia++;
+            }
+        }
+
+        System.out.printf("Menor valor de faturamento: %.2f%n", menorValor);
+        System.out.printf("Maior valor de faturamento: %.2f%n", maiorValor);
+        System.out.println("Número de dias com faturamento acima da média: " + diasAcimaDaMedia);
         System.out.println();
 
         // Exercício 04 (Faturamento mensal)
@@ -98,9 +110,9 @@ public class Main {
         System.out.println("Faturamento percentual por estado:");
         for (Map.Entry<String, Double> entry : faturamentoPorEstado.entrySet()) {
             String estado = entry.getKey();
-            double faturamento = entry.getValue();
-            double percentual = (faturamento / totalFaturamento) * 100;
-            System.out.printf("%s: R$%.2f (%.2f%%)%n", estado, faturamento, percentual);
+            double faturamentoMensal = entry.getValue();
+            double percentual = (faturamentoMensal / totalFaturamento) * 100;
+            System.out.printf("%s: R$%.2f (%.2f%%)%n", estado, faturamentoMensal, percentual);
         }
         System.out.println();
         sc.nextLine();
@@ -120,5 +132,23 @@ public class Main {
             invertida.append(str.charAt(i));
         }
         return invertida.toString().toLowerCase();
+    }
+
+    private static String getJsonFromUrl(String urlString) {
+        StringBuilder result = new StringBuilder();
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+            rd.close();
+        } catch (Exception e) {
+            System.out.println("Error accessing json url: " + urlString);
+        }
+        return result.toString();
     }
 }
